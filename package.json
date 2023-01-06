@@ -1,0 +1,7 @@
+{
+  "name": "gcloud-vision-poc",
+  "packageManager": "yarn@3.3.1",
+  "dependencies": {
+    "@google-cloud/vision": "^3.0.1"
+  }
+}
