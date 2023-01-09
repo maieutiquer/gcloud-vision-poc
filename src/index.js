@@ -12,10 +12,12 @@ async function quickstart(file) {
 
   // Performs label detection on the image file
   const [result] = await client.textDetection(path.join(directoryPath, file));
-  const labels = result.fullTextAnnotation;
+  // const labels = result.fullTextAnnotation;
   console.log(`\nRead-like values in "${file}":`);
   console.log(
-    labels.text.split("\n").filter((line) => /^\d+\.\d+$/.test(line))
+    result.fullTextAnnotation.text
+      .split("\n")
+      .filter((line) => /^\d+\.\d+$/.test(line))
   );
   // labels.text.forEach((label) => console.log(label.description));
 }
