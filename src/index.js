@@ -11,10 +11,13 @@ async function quickstart(file) {
   const client = new vision.ImageAnnotatorClient();
 
   // Performs label detection on the image file
-  const [result] = await client.labelDetection(path.join(directoryPath, file));
-  const labels = result.labelAnnotations;
-  console.log(`\n${file}:`);
-  labels.forEach((label) => console.log(label.description));
+  const [result] = await client.textDetection(path.join(directoryPath, file));
+  const labels = result.fullTextAnnotation;
+  console.log(`\nRead-like values in "${file}":`);
+  console.log(
+    labels.text.split("\n").filter((line) => /^\d+\.\d+$/.test(line))
+  );
+  // labels.text.forEach((label) => console.log(label.description));
 }
 
 fs.readdir(directoryPath, function (err, files) {
