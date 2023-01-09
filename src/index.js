@@ -11,7 +11,9 @@ async function quickstart(file) {
   const client = new vision.ImageAnnotatorClient();
 
   // Performs label detection on the image file
-  const [result] = await client.textDetection(path.join(directoryPath, file));
+  const [result] = await client.documentTextDetection(
+    path.join(directoryPath, file)
+  );
   // const labels = result.fullTextAnnotation;
   console.log(`\nRead-like values in "${file}":`);
   console.log(
@@ -19,6 +21,18 @@ async function quickstart(file) {
       .split("\n")
       .filter((line) => /^\d+\.\d+$/.test(line))
   );
+  console.log(
+    "Confidences (TODO extract correct ones for read-like value characters):"
+  );
+  console.log(
+    result.fullTextAnnotation.pages[0].blocks[0].paragraphs[0].words[0]
+      .symbols[3]
+  );
+  // console.log(
+  //   result.fullTextAnnotation.pages[0].blocks[0].boundingBox.vertices[0]
+  // );
+  // console.log(result.fullTextAnnotation.pages[0].boundingBox.vertices);
+  // console.log(JSON.stringify(result, null, 4));
   // labels.text.forEach((label) => console.log(label.description));
 }
 
